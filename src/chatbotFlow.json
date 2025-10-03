@@ -1,0 +1,101 @@
+[
+  {
+    "id": "greeting",
+    "message": "Hi, welcome to Speicher! We help businesses with Digital Marketing, Web/App Development, and E-Commerce solutions. What brings you here today?",
+    "options": [
+      { "label": "🚀 Digital Marketing", "next": "digitalMarketing" },
+      { "label": "🌐 Website / App", "next": "websiteApp" },
+      { "label": "🛒 E-Commerce Listings", "next": "ecommerce" },
+      { "label": "☁ IT / Cloud / Security Solutions", "next": "itCloud" },
+      { "label": "👀 Just browsing", "next": "justBrowsing" }
+    ]
+  },
+  {
+    "id": "digitalMarketing",
+    "message": "What type of digital marketing do you need?",
+    "options": [
+      { "label": "SEO (Google Ranking)", "next": "budget" },
+      { "label": "Paid Ads (Google / Meta)", "next": "budget" },
+      { "label": "Social Media Management", "next": "budget" },
+      { "label": "Email / Affiliate Marketing", "next": "budget" },
+      { "label": "Not sure, guide me", "next": "budget" }
+    ]
+  },
+  {
+    "id": "websiteApp",
+    "message": "Do you need a new website/app or want to upgrade existing one? Which type do you need?",
+    "options": [
+      { "label": "Corporate Website", "next": "budget" },
+      { "label": "E-Commerce Website", "next": "budget" },
+      { "label": "Custom CRM / Portal", "next": "budget" },
+      { "label": "Mobile App", "next": "budget" }
+    ]
+  },
+  {
+    "id": "ecommerce",
+    "message": "Which platform are you selling on?",
+    "options": [
+      { "label": "Amazon", "next": "budget" },
+      { "label": "Flipkart", "next": "budget" },
+      { "label": "Blinkit / Nykaa", "next": "budget" },
+      { "label": "Need only listing or ads + optimization?", "next": "budget" }
+    ]
+  },
+  {
+    "id": "itCloud",
+    "message": "Which service are you exploring?",
+    "options": [
+      { "label": "Cloud Migration", "next": "budget" },
+      { "label": "Antivirus / Security", "next": "budget" },
+      { "label": "IoT / AR / VR", "next": "budget" }
+    ]
+  },
+  {
+    "id": "justBrowsing",
+    "message": "No problem! If you need any help, just let us know. Would you like to see our portfolio, pricing, or client testimonials?",
+    "options": [
+      { "label": "Portfolio & case studies", "next": "closing" },
+      { "label": "Pricing / packages", "next": "closing" },
+      { "label": "Workflow", "next": "closing" },
+      { "label": "Client testimonials", "next": "closing" }
+    ]
+  },
+  {
+    "id": "budget",
+    "message": "What’s your budget range?",
+    "options": [
+      { "label": "< ₹50k", "next": "timeline" },
+      { "label": "₹50k–₹2L", "next": "timeline" },
+      { "label": "> ₹2L", "next": "timeline" }
+    ]
+  },
+  {
+    "id": "timeline",
+    "message": "When do you want to start?",
+    "options": [
+      { "label": "Now", "next": "leadCapture" },
+      { "label": "1–2 months", "next": "leadCapture" },
+      { "label": "Exploring", "next": "leadCapture" }
+    ]
+  },
+  {
+    "id": "leadCapture",
+    "message": "To prepare your proposal, please share your details:",
+    "form": [
+      { "label": "Name", "type": "text", "name": "name" },
+      { "label": "Email", "type": "email", "name": "email" },
+      { "label": "Phone number", "type": "tel", "name": "phone" },
+      { "label": "Company", "type": "text", "name": "company" }
+    ],
+    "next": "closing"
+  },
+  {
+    "id": "closing",
+    "message": "Thank you! Our consultant will call you shortly. Would you like to talk to our expert now?",
+    "options": [
+      { "label": "📞 Call Now", "cta": "call" },
+      { "label": "📅 Schedule Call Back", "cta": "schedule" },
+      { "label": "💬 Chat with Agent", "cta": "livechat" }
+    ]
+  }
+]
