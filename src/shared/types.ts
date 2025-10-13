@@ -21,3 +21,27 @@ export interface QuestionAnswerPair {
   stepId: string;
   createdAt: string;
 }
+
+export interface ChatSession {
+  _id?: string;
+  id: string;
+  userId: string;
+  userEmail: string;
+  userName: string;
+  status: 'waiting' | 'active' | 'closed';
+  agentId?: string;
+  agentName?: string;
+  createdAt: string;
+  updatedAt: string;
+  initialMessage: string;
+  questionAnswerPairs?: QuestionAnswerPair[];
+}
+
+export interface ChatMessage {
+  _id?: string;
+  id: string;
+  sessionId: string;
+  sender: 'user' | 'agent';
+  message: string;
+  createdAt: string;
+}

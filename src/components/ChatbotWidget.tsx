@@ -18,6 +18,7 @@ type ChatbotOption = {
 import { motion } from 'framer-motion';
 import type { Conversation, QuestionAnswerPair } from '../shared/types';
 import toast from 'react-hot-toast';
+import LiveChat from './LiveChat';
 
 export default function ChatbotWidget() {
   const [conversation, setConversation] = useState<Conversation | null>(null);
@@ -34,6 +35,13 @@ export default function ChatbotWidget() {
     phone: string;
     company: string;
   }>({ name: '', email: '', phone: '', company: '' });
+  const [showLiveChat, setShowLiveChat] = useState<boolean>(false);
+  const [liveChatUserInfo, setLiveChatUserInfo] = useState<{
+    name: string;
+    email: string;
+    phone: string;
+    company: string;
+  } | null>(null);
   const currentStep: ChatbotStep | undefined = (
     chatbotFlow as ChatbotStep[]
   ).find((s) => s.id === step);
@@ -78,6 +86,19 @@ export default function ChatbotWidget() {
       return;
     }
     if (option.cta === 'livechat') {
+      // Check if user has provided contact info
+      if (!liveChatUserInfo) {
+        // If no user info, redirect to lead capture first
+        setStep('leadCapture');
+        const leadCaptureStep = (chatbotFlow as ChatbotStep[]).find(
+          (s) => s.id === 'leadCapture'
+        );
+        if (leadCaptureStep) {
+          setCurrentQuestion(leadCaptureStep.message);
+        }
+        return;
+      }
+      
       const livechatPair: QuestionAnswerPair = {
         id: Math.random().toString(),
         conversationId: conversation.id,
@@ -87,6 +108,7 @@ export default function ChatbotWidget() {
         createdAt: new Date().toISOString(),
       };
       setQuestionAnswerPairs((prev) => [...prev, livechatPair]);
+      setShowLiveChat(true);
       return;
     }
 
@@ -137,6 +159,14 @@ export default function ChatbotWidget() {
       if (response.ok) {
         const result = await response.json();
         console.log('Lead saved successfully:', result);
+        
+        // Store user info for potential live chat
+        setLiveChatUserInfo({
+          name: formData.name,
+          email: formData.email,
+          phone: formData.phone,
+          company: formData.company
+        });
        
       } else {
         throw new Error('Failed to save lead');
@@ -159,6 +189,17 @@ export default function ChatbotWidget() {
         setCurrentQuestion(nextStep.message);
       }, 1000);
     }
+  }
+
+  // Show live chat if requested
+  if (showLiveChat && liveChatUserInfo) {
+    return (
+      <LiveChat
+        userInfo={liveChatUserInfo}
+        questionAnswerPairs={questionAnswerPairs}
+        onClose={() => setShowLiveChat(false)}
+      />
+    );
   }
 
   return (
