@@ -44,7 +44,6 @@ class SocketClient {
       reconnectionDelay: this.reconnectDelay,
       reconnectionDelayMax: 5000,
       reconnectionAttempts: this.maxReconnectAttempts,
-      maxReconnectionAttempts: this.maxReconnectAttempts,
       randomizationFactor: 0.5,
       withCredentials: true,
       autoConnect: true,
@@ -84,7 +83,7 @@ class SocketClient {
         isConnecting: false,
         lastError: { 
           message: error.message || 'Connection failed', 
-          code: error.code,
+          code: '500',
           timestamp: new Date().toISOString() 
         }
       });

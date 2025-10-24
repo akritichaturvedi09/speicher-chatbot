@@ -22,7 +22,7 @@ export function validateRequestBody<T>(schema: z.ZodSchema<T>, data: unknown): T
     return schema.parse(data);
   } catch (error) {
     if (error instanceof z.ZodError) {
-      const errorMessage = error.errors.map(err => 
+      const errorMessage = error.issues.map(err => 
         `${err.path.join('.')}: ${err.message}`
       ).join(', ');
       throw new ValidationError(`Validation failed: ${errorMessage}`);

@@ -159,7 +159,7 @@ class ErrorReporter {
 export const errorReporter = ErrorReporter.getInstance();
 
 // Convenience function for React Error Boundaries
-export function reportReactError(error: Error, errorInfo: { componentStack: string }): void {
+export function reportReactError(error: Error, errorInfo: { componentStack?: string | null | undefined }): void {
   errorReporter.reportError(error, {
     type: 'react',
     componentStack: errorInfo.componentStack

@@ -133,7 +133,7 @@ function LiveChatComponent({ userInfo, questionAnswerPairs, onClose }: LiveChatP
 
     socketClient.onSessionClosed(() => {
       setSessionStatus('closed');
-      toast.info('Chat session ended');
+      toast.success('Chat session ended');
     });
 
     socketClient.onSessionError((error) => {
@@ -173,7 +173,7 @@ function LiveChatComponent({ userInfo, questionAnswerPairs, onClose }: LiveChatP
 
     try {
       // Send message with error handling
-      const confirmedMessage = await socketClient.sendMessage(messageData);
+      const confirmedMessage:any = await socketClient.sendMessage(messageData);
       console.log('✅ Message confirmed by server');
       
       // Update the message with server timestamp if different
@@ -206,7 +206,7 @@ function LiveChatComponent({ userInfo, questionAnswerPairs, onClose }: LiveChatP
           : msg
       ));
 
-      const confirmedMessage = await socketClient.sendMessage(message);
+      const confirmedMessage:any = await socketClient.sendMessage(message);
       console.log('✅ Message retry successful');
       
       if (confirmedMessage && confirmedMessage.createdAt !== message.createdAt) {
